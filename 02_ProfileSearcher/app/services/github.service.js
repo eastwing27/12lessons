@@ -17,10 +17,21 @@ var GithubService = (function () {
         this.client_id = '72a9fbddef93f07aeeb7';
         this.client_secret = '17307e857f9e2008629505c5c2cb38023b16968b';
         this.username = 'eastwing27';
+        console.info('GithubService ready!');
     }
+    GithubService.prototype.getAuthPair = function () {
+        return 'client_id=' + this.client_id + '&client_secret=' + this.client_secret;
+    };
     GithubService.prototype.getUser = function () {
-        this._http.get('http"//api.github.com/users/' + this.username)
-            .map(function (res) { return res.json; });
+        return this._http.get('http://api.github.com/users/' + this.username + '?' + this.getAuthPair())
+            .map(function (res) { return res.json(); });
+    };
+    GithubService.prototype.getRepos = function () {
+        return this._http.get('http://api.github.com/users/' + this.username + '/repos?' + this.getAuthPair())
+            .map(function (res) { return res.json(); });
+    };
+    GithubService.prototype.updateUser = function (username) {
+        this.username = username;
     };
     return GithubService;
 }());

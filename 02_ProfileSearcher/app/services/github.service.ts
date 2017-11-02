@@ -10,10 +10,27 @@ export class GithubService {
 
     constructor(private _http: Http){
         this.username = 'eastwing27';
+        console.info('GithubService ready!');
+    }
+
+    private getAuthPair(){
+        return 'client_id=' + this.client_id + '&client_secret=' + this.client_secret;
     }
 
     getUser(){
-        this._http.get('http"//api.github.com/users/'+this.username)
-            .map (res => res.json);
+        return this._http.get
+            ('http://api.github.com/users/' + this.username + '?' + this.getAuthPair())
+            .map (res => res.json());
+    }
+
+    getRepos()
+    {
+        return this._http.get
+            ('http://api.github.com/users/' + this.username + '/repos?' + this.getAuthPair())
+            .map(res => res.json());
+    }
+
+    updateUser(username: string){
+        this.username = username;
     }
 }
