@@ -1,7 +1,10 @@
-*/node_modules/
-*/package-lock.json
+node_modules/
+bower_components/
+package-lock.json
 *.map
 
 01_Basic/app/*.js
 02_ProfileSearcher/app/*.js
 03_SpotifyApp/app/*.js
+04_Todo/app/*.js
+05_Contacts/app/*.js
